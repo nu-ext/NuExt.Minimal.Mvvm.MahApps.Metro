@@ -1,6 +1,6 @@
 ﻿using ControlzEx.Theming;
 using Minimal.Mvvm;
-using Minimal.Mvvm.Windows;
+using Minimal.Mvvm.Wpf;
 using MovieWpfApp.Models;
 using MovieWpfApp.Views;
 using System.Diagnostics;
@@ -97,10 +97,8 @@ namespace MovieWpfApp.ViewModels
         }
 
         [Notify(Setter = Private)]
-        private async Task ShowMoviesAsync()
+        private async Task ShowMoviesAsync(CancellationToken cancellationToken)
         {
-            var cancellationToken = GetCurrentCancellationToken();
-
             var document = await DocumentManagerService!.FindDocumentByIdOrCreateAsync(default(Movies),
                 async x =>
                 {
@@ -155,10 +153,8 @@ namespace MovieWpfApp.ViewModels
         }
 
         [Notify(Setter = Private)]
-        private async Task OpenMovieAsync(MovieModel movie)
+        private async Task OpenMovieAsync(MovieModel movie, CancellationToken cancellationToken)
         {
-            var cancellationToken = GetCurrentCancellationToken();
-
             var document = await DocumentManagerService!.FindDocumentByIdOrCreateAsync(new MovieDocument(movie), async x =>
             {
                 var vm = new MovieViewModel();
@@ -180,10 +176,8 @@ namespace MovieWpfApp.ViewModels
         }
 
         [Notify(Setter = Private)]
-        private async Task OpenMovieExternalAsync(MovieModel movie)
+        private async Task OpenMovieExternalAsync(MovieModel movie, CancellationToken cancellationToken)
         {
-            var cancellationToken = GetCurrentCancellationToken();
-
             var document = await WindowManagerService!.FindDocumentByIdOrCreateAsync(new MovieDocument(movie), async x =>
             {
                 var vm = new MovieViewModel();

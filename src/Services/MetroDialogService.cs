@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Minimal.Mvvm.Windows
+namespace Minimal.Mvvm.Wpf
 {
     /// <summary>
     /// Provides asynchronous methods to show and manage dialogs using MahApps.Metro dialog coordinator.
@@ -196,13 +196,11 @@ namespace Minimal.Mvvm.Windows
                 Mode = BindingMode.OneWay
             });
 
-            await ViewModelHelper.InitializeViewAsync(view, viewModel, parentViewModel, parameter, cancellationToken);
-
             var dialogCoordinator = DialogCoordinator ?? MahApps.Metro.Controls.Dialogs.DialogCoordinator.Instance;
-            await dialogCoordinator.ShowMetroDialogAsync(this, dialog);
-
             try
             {
+                await ViewModelHelper.InitializeViewAsync(view, viewModel, parentViewModel, parameter, cancellationToken);               
+                await dialogCoordinator.ShowMetroDialogAsync(this, dialog);
                 return await dialog.WaitForButtonPressAsync();
             }
             finally

@@ -1,4 +1,4 @@
-﻿using Minimal.Mvvm.Windows;
+﻿using Minimal.Mvvm.Wpf;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;

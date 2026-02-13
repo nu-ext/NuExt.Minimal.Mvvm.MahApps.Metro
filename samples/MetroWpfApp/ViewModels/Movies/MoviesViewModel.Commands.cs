@@ -16,11 +16,9 @@ namespace MovieWpfApp.ViewModels
         private bool CanDelete() => CanEdit() && ParentViewModel?.CloseMovieCommand is not null;
 
         [Notify(Setter = Private)]
-        private async Task DeleteAsync()
+        private async Task DeleteAsync(CancellationToken cancellationToken)
         {
             VerifyAccess();
-
-            var cancellationToken = GetCurrentCancellationToken();
 
             var dialogSettings = new MetroDialogSettings
             {
@@ -59,11 +57,9 @@ namespace MovieWpfApp.ViewModels
         }
 
         [Notify(Setter = Private)]
-        private async Task EditAsync()
+        private async Task EditAsync(CancellationToken cancellationToken)
         {
             VerifyAccess();
-
-            var cancellationToken = GetCurrentCancellationToken();
 
             var clone = SelectedItem!.Clone();
 
@@ -116,11 +112,9 @@ namespace MovieWpfApp.ViewModels
         }
 
         [Notify(Setter = Private)]
-        private async Task NewGroupAsync()
+        private async Task NewGroupAsync(CancellationToken cancellationToken)
         {
             VerifyAccess();
-
-            var cancellationToken = GetCurrentCancellationToken();
 
             var dialogSettings = new MetroDialogSettings 
             {
@@ -158,10 +152,8 @@ namespace MovieWpfApp.ViewModels
         private bool CanNewMovie() => CanNewGroup();
 
         [Notify(Setter = Private)]
-        private async Task NewMovieAsync()
+        private async Task NewMovieAsync(CancellationToken cancellationToken)
         {
-            var cancellationToken = GetCurrentCancellationToken();
-
             await using var viewModel = new EditMovieViewModel();
 
             var movie = new MovieModel()
@@ -194,16 +186,14 @@ namespace MovieWpfApp.ViewModels
         }
 
         [Notify(Setter = Private)]
-        private async Task OpenMovieAsync(MovieModelBase? item)
+        private async Task OpenMovieAsync(MovieModelBase? item, CancellationToken cancellationToken)
         {
-            var cancellationToken = GetCurrentCancellationToken();
             await ParentViewModel!.OpenMovieCommand!.ExecuteAsync((item as MovieModel)!, cancellationToken);
         }
 
         [Notify(Setter = Private)]
-        private async Task OpenMovieExternalAsync(MovieModelBase? item)
+        private async Task OpenMovieExternalAsync(MovieModelBase? item, CancellationToken cancellationToken)
         {
-            var cancellationToken = GetCurrentCancellationToken();
             await ParentViewModel!.OpenMovieExternalCommand!.ExecuteAsync((item as MovieModel)!, cancellationToken);
         }
 
@@ -213,10 +203,8 @@ namespace MovieWpfApp.ViewModels
         }
 
         [Notify(Setter = Private)]
-        private async Task MoveAsync(MovieModelBase draggedObject)
+        private async Task MoveAsync(MovieModelBase draggedObject, CancellationToken cancellationToken)
         {
-            var cancellationToken = GetCurrentCancellationToken();
-
             var path = draggedObject.GetPath();
             await ReloadMoviesAsync(cancellationToken);
             var item = Movies!.FindByPath(path);

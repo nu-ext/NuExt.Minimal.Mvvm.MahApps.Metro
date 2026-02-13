@@ -1,7 +1,7 @@
 ﻿using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Extensions.Logging;
 using Minimal.Mvvm;
-using Minimal.Mvvm.Windows;
+using Minimal.Mvvm.Wpf;
 using MovieWpfApp.Models;
 using MovieWpfApp.Services;
 using System.Collections.ObjectModel;
@@ -49,16 +49,7 @@ namespace MovieWpfApp.ViewModels
 
         private void OnSelectedItemChanged(MovieModelBase? oldSelectedItem)
         {
-            var newSelectedItem = SelectedItem;
-            if (newSelectedItem != null)
-            {
-            }
-            NewGroupCommand?.RaiseCanExecuteChanged();
-            NewMovieCommand?.RaiseCanExecuteChanged();
-            EditCommand?.RaiseCanExecuteChanged();
-            DeleteCommand?.RaiseCanExecuteChanged();
-            OpenMovieCommand?.RaiseCanExecuteChanged();
-            OpenMovieExternalCommand?.RaiseCanExecuteChanged();
+            RaiseCanExecuteChanged();
         }
 
         #endregion

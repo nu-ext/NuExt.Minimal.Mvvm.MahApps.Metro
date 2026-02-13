@@ -1,12 +1,12 @@
 # NuExt.Minimal.Mvvm.MahApps.Metro
 
-`NuExt.Minimal.Mvvm.MahApps.Metro` is a NuGet package that provides extensions for integrating [MahApps.Metro](https://github.com/MahApps/MahApps.Metro), a popular Metro-style UI toolkit for WPF applications, with [NuExt.Minimal.Mvvm.Windows](https://github.com/IvanGit/NuExt.Minimal.Mvvm.Windows), an extension for the lightweight MVVM framework [NuExt.Minimal.Mvvm](https://github.com/IvanGit/NuExt.Minimal.Mvvm). This package includes services and components to facilitate the creation of modern, responsive, and visually appealing user interfaces using the MVVM pattern.
+`NuExt.Minimal.Mvvm.MahApps.Metro` is a NuGet package that provides extensions for integrating [MahApps.Metro](https://github.com/MahApps/MahApps.Metro), a popular Metro-style UI toolkit for WPF applications, with [NuExt.Minimal.Mvvm.Wpf](https://github.com/IvanGit/NuExt.Minimal.Mvvm.Wpf), a Wpf extension for the lightweight MVVM framework [NuExt.Minimal.Mvvm](https://github.com/IvanGit/NuExt.Minimal.Mvvm). This package includes services and components to facilitate the creation of modern, responsive, and visually appealing user interfaces using the MVVM pattern.
 
 ### Commonly Used Types
 
-- **`Minimal.Mvvm.Windows.DialogCoordinatorService`**: Provides dialog coordination services using MahApps.Metro dialogs.
-- **`Minimal.Mvvm.Windows.MetroDialogService`**: Implementation of `IAsyncDialogService` for Metro dialogs.
-- **`Minimal.Mvvm.Windows.MetroTabbedDocumentService`**: Manages tabbed documents within a UI.
+- **`Minimal.Mvvm.Wpf.DialogCoordinatorService`**: Provides dialog coordination services using MahApps.Metro dialogs.
+- **`Minimal.Mvvm.Wpf.MetroDialogService`**: Implementation of `IAsyncDialogService` for Metro dialogs.
+- **`Minimal.Mvvm.Wpf.MetroTabbedDocumentService`**: Manages tabbed documents within a UI.
 - **`MahApps.Metro.Controls.Dialogs.MetroDialog`**: The class used for custom dialogs.
 
 ### Key Features

@@ -10,9 +10,9 @@ using System.Windows.Markup;
                                                 // app, or any theme specific resource dictionaries)
 )]
 
-[assembly: XmlnsPrefix("http://schemas.minimalmvvm.com/winfx/xaml/mvvm", "minimal")]
-[assembly: XmlnsDefinition("http://schemas.minimalmvvm.com/winfx/xaml/mvvm", "Minimal.Mvvm")]
-[assembly: XmlnsDefinition("http://schemas.minimalmvvm.com/winfx/xaml/mvvm", "Minimal.Mvvm.Windows")]
+[assembly: XmlnsPrefix("http://schemas.nuext.minimal/xaml", "minimal")]
+[assembly: XmlnsDefinition("http://schemas.nuext.minimal/xaml", "Minimal.Mvvm")]
+[assembly: XmlnsDefinition("http://schemas.nuext.minimal/xaml", "Minimal.Mvvm.Wpf")]
 
 [assembly: XmlnsPrefix("http://metro.mahapps.com/winfx/xaml/controls", "mah")]
 [assembly: XmlnsDefinition("http://metro.mahapps.com/winfx/xaml/controls", "MahApps.Metro.Controls")]

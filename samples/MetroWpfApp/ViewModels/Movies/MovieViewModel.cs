@@ -1,6 +1,6 @@
 ﻿using MahApps.Metro.Controls.Dialogs;
 using Minimal.Mvvm;
-using Minimal.Mvvm.Windows;
+using Minimal.Mvvm.Wpf;
 using MovieWpfApp.Models;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -22,8 +22,6 @@ namespace MovieWpfApp.ViewModels
         #region Services
 
         private IDialogCoordinator DialogCoordinator => GetService<IDialogCoordinator>()!;
-
-        private WindowService? WindowService => GetService<WindowService>();
 
         #endregion
 

@@ -2,9 +2,9 @@
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    xmlns:mvvm="clr-namespace:Minimal.Mvvm.Windows"
+                    xmlns:mvvm="clr-namespace:Minimal.Mvvm.Wpf"
                     xmlns:controls="clr-namespace:MahApps.Metro.Controls"
-                    xmlns:minimal="http://schemas.minimalmvvm.com/winfx/xaml/mvvm"
+                    xmlns:minimal="http://schemas.nuext.minimal/xaml"
                     mc:Ignorable="d">
 
     <ResourceDictionary.MergedDictionaries>

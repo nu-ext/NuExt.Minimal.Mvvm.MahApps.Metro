@@ -1,6 +1,8 @@
-﻿using Minimal.Mvvm.Windows;
+﻿using Minimal.Mvvm.Wpf;
+using Presentation.Wpf;
 using System.Collections;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -154,7 +156,11 @@ namespace MahApps.Metro.Controls.Dialogs
 
         private Lifetime SubscribeMetroDialog()
         {
-            var lifetime = new Lifetime();
+            var lifetime = new Lifetime()
+#if DEBUG
+                    .SetDebugInfo()
+#endif
+                ;
 
             if (DialogSettings.CancellationToken.CanBeCanceled)
             {

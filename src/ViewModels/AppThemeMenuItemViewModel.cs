@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace Minimal.Mvvm.Windows
+namespace Minimal.Mvvm.Wpf
 {
     public partial class AccentColorMenuItemViewModel : MenuItemViewModel
     {
