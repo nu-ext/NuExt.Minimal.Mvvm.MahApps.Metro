@@ -4,7 +4,7 @@
                  xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                 xmlns:minimal="http://schemas.nuext.minimal/xaml"
+                 xmlns:nx="http://schemas.nuext.minimal/xaml"
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  xmlns:local="clr-namespace:MovieWpfApp"
                  xmlns:viewModels="clr-namespace:MovieWpfApp.ViewModels"
@@ -25,50 +25,50 @@
                                         Foreground="{DynamicResource MahApps.Brushes.IdealForeground}"/>
         </DataTemplate>
     </mah:MetroWindow.IconTemplate>
-    <minimal:Interaction.Behaviors>
-        <minimal:WindowService/>
-        <minimal:DialogCoordinatorService x:Name="DialogCoordinatorService"/>
-        <minimal:MetroDialogService DialogCoordinator="{Binding Source={x:Reference DialogCoordinatorService}}"
-                                    MessageBoxButtonLocalizer="{StaticResource MessageBoxButtonLocalizer}"
-                                    DialogContentMargin="*"
-                                    DialogContentWidth="8*"
-                                    ValidatesOnDataErrors="True"/>
-        <minimal:EventToCommand EventName="Closing" Command="{Binding ClosingCommand}" PassEventArgsToCommand="True"/>
-        <minimal:EventToCommand EventName="ContentRendered" Command="{Binding ContentRenderedCommand}"/>
-        <minimal:EventToCommand EventName="Loaded" Command="{Binding LoadedCommand}" />
-        <minimal:KeyToCommand Gesture="CTRL+O" Command="{Binding ShowMoviesCommand}" />
-        <minimal:WindowPlacementService FileName="MainWindow" 
-                                        DirectoryName="{Binding EnvironmentService.SettingsDirectory, FallbackValue={x:Null}}"
-                                        PlacementRestoredCommand="{Binding PlacementRestoredCommand}" 
-                                        PlacementSavedCommand="{Binding PlacementSavedCommand}"/>
-        <minimal:SettingsService Prefix="MainWindow" 
-                                 DirectoryName="{Binding EnvironmentService.SettingsDirectory, FallbackValue={x:Null}}"/>
-        <minimal:WindowedDocumentService x:Name="Windows" 
-                                         ActiveDocument="{Binding ActiveWindow}"
-                                         FallbackViewType="{x:Type views:ErrorView}">
-            <minimal:WindowedDocumentService.WindowStyle>
+    <nx:Interaction.Behaviors>
+        <nx:WindowService/>
+        <nx:DialogCoordinatorService x:Name="DialogCoordinatorService"/>
+        <nx:MetroDialogService DialogCoordinator="{Binding Source={x:Reference DialogCoordinatorService}}"
+                               MessageBoxButtonLocalizer="{StaticResource MessageBoxButtonLocalizer}"
+                               DialogContentMargin="*"
+                               DialogContentWidth="8*"
+                               ValidatesOnDataErrors="True"/>
+        <nx:EventToCommand EventName="Closing" Command="{Binding ClosingCommand}" PassEventArgsToCommand="True"/>
+        <nx:EventToCommand EventName="ContentRendered" Command="{Binding ContentRenderedCommand}"/>
+        <nx:EventToCommand EventName="Loaded" Command="{Binding LoadedCommand}" />
+        <nx:KeyToCommand Gesture="CTRL+O" Command="{Binding ShowMoviesCommand}" />
+        <nx:WindowPlacementService FileName="MainWindow" 
+                                   DirectoryName="{Binding EnvironmentService.SettingsDirectory, FallbackValue={x:Null}}"
+                                   PlacementRestoredCommand="{Binding PlacementRestoredCommand}" 
+                                   PlacementSavedCommand="{Binding PlacementSavedCommand}"/>
+        <nx:SettingsService Prefix="MainWindow" 
+                            DirectoryName="{Binding EnvironmentService.SettingsDirectory, FallbackValue={x:Null}}"/>
+        <nx:WindowedDocumentService x:Name="Windows" 
+                                    ActiveDocument="{Binding ActiveWindow}"
+                                    FallbackViewType="{x:Type views:ErrorView}">
+            <nx:WindowedDocumentService.WindowStyle>
                 <Style TargetType="{x:Type mah:MetroWindow}">
-                    <Setter Property="minimal:Interaction.BehaviorsTemplate">
+                    <Setter Property="nx:Interaction.BehaviorsTemplate">
                         <Setter.Value>
                             <DataTemplate>
                                 <ItemsControl>
-                                    <minimal:DialogCoordinatorService />
-                                    <minimal:WindowService Name="CurrentWindowService"/>
-                                    <minimal:EventToCommand EventName="ContentRendered" Command="{Binding ContentRenderedCommand}"/>
+                                    <nx:DialogCoordinatorService />
+                                    <nx:WindowService Name="CurrentWindowService"/>
+                                    <nx:EventToCommand EventName="ContentRendered" Command="{Binding ContentRenderedCommand}"/>
                                 </ItemsControl>
                             </DataTemplate>
                         </Setter.Value>
                     </Setter>
                 </Style>
-            </minimal:WindowedDocumentService.WindowStyle>
-            <minimal:WindowedDocumentService.WindowType>
+            </nx:WindowedDocumentService.WindowStyle>
+            <nx:WindowedDocumentService.WindowType>
                 <x:Type TypeName="mah:MetroWindow"/>
-            </minimal:WindowedDocumentService.WindowType>
-            <minimal:Interaction.Behaviors>
-                <minimal:EventToCommand EventName="ActiveDocumentChanged" Command="{Binding ActiveWindowChangedCommand}"/>
-            </minimal:Interaction.Behaviors>
-        </minimal:WindowedDocumentService>
-    </minimal:Interaction.Behaviors>
+            </nx:WindowedDocumentService.WindowType>
+            <nx:Interaction.Behaviors>
+                <nx:EventToCommand EventName="ActiveDocumentChanged" Command="{Binding ActiveWindowChangedCommand}"/>
+            </nx:Interaction.Behaviors>
+        </nx:WindowedDocumentService>
+    </nx:Interaction.Behaviors>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -85,15 +85,15 @@
                              mah:HeaderedControlHelper.HeaderFontSize="14"
                              mah:TabControlHelper.Underlined="SelectedTabItem" 
                              mah:TabControlHelper.UnderlinePlacement="Bottom">
-            <minimal:Interaction.Behaviors>
-                <minimal:MetroTabbedDocumentService x:Name="Documents" CloseButtonEnabled="True"
-                                                    ActiveDocument="{Binding ActiveDocument}"
-                                                    FallbackViewType="{x:Type views:ErrorView}">
-                    <minimal:Interaction.Behaviors>
-                        <minimal:EventToCommand EventName="ActiveDocumentChanged" Command="{Binding ActiveDocumentChangedCommand}"/>
-                    </minimal:Interaction.Behaviors>
-                </minimal:MetroTabbedDocumentService>
-            </minimal:Interaction.Behaviors>
+            <nx:Interaction.Behaviors>
+                <nx:MetroTabbedDocumentService x:Name="Documents" CloseButtonEnabled="True"
+                                               ActiveDocument="{Binding ActiveDocument}"
+                                               FallbackViewType="{x:Type views:ErrorView}">
+                    <nx:Interaction.Behaviors>
+                        <nx:EventToCommand EventName="ActiveDocumentChanged" Command="{Binding ActiveDocumentChangedCommand}"/>
+                    </nx:Interaction.Behaviors>
+                </nx:MetroTabbedDocumentService>
+            </nx:Interaction.Behaviors>
         </mah:MetroTabControl>
 
         <StatusBar Grid.Row="2">

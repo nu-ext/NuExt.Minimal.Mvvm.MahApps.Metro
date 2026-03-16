@@ -1,15 +1,14 @@
 ﻿using System.Windows.Media;
 
-namespace Minimal.Mvvm.Wpf
+namespace Minimal.Mvvm.Wpf;
+
+public partial class AccentColorMenuItemViewModel : MenuItemViewModel
 {
-    public partial class AccentColorMenuItemViewModel : MenuItemViewModel
-    {
-        [Notify] private Brush? _borderColorBrush;
-        [Notify] private Brush? _colorBrush;
-    }
+    [Notify] private Brush? _borderColorBrush;
+    [Notify] private Brush? _colorBrush;
+}
 
-    public class AppThemeMenuItemViewModel : AccentColorMenuItemViewModel
-    {
+public class AppThemeMenuItemViewModel : AccentColorMenuItemViewModel
+{
 
-    }
 }

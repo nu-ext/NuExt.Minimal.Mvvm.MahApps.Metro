@@ -4,7 +4,7 @@
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:mvvm="clr-namespace:Minimal.Mvvm.Wpf"
                     xmlns:controls="clr-namespace:MahApps.Metro.Controls"
-                    xmlns:minimal="http://schemas.nuext.minimal/xaml"
+                    xmlns:nx="http://schemas.nuext.minimal/xaml"
                     mc:Ignorable="d">
 
     <ResourceDictionary.MergedDictionaries>
@@ -18,7 +18,7 @@
 
     <Style x:Key="MahApps.Styles.MenuItem.Default" BasedOn="{StaticResource MahApps.Styles.MenuItem}" TargetType="{x:Type MenuItem}">
         <d:Style.DataContext>
-            <x:Type Type="minimal:MenuItemViewModel" />
+            <x:Type Type="nx:MenuItemViewModel" />
         </d:Style.DataContext>
         <Setter Property="CommandParameter" Value="{Binding CommandParameter}" />
         <Setter Property="Command" Value="{Binding Command}" />

@@ -6,7 +6,7 @@
     <UseWPF>true</UseWPF>
     <ImplicitUsings>enable</ImplicitUsings>
     <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
-    <PackageTags>nuext;minimal;mvvm;wpf;xaml;ui;metro;modern;async</PackageTags>
+    <PackageTags>nuext;nx;minimal;mvvm;wpf;mahapps; mahapps.metro;xaml;ui;metro;modern;async</PackageTags>
     <Description>Extensions for the MahApps.Metro toolkit using the Minimal MVVM Framework for streamlined Metro-style WPF app development.
 
 Commonly Used Types:
@@ -14,13 +14,13 @@ Minimal.Mvvm.Wpf.DialogCoordinatorService
 Minimal.Mvvm.Wpf.MetroDialogService
 Minimal.Mvvm.Wpf.MetroTabbedDocumentService
 MahApps.Metro.Controls.Dialogs.MetroDialog</Description>
-    <Version>0.7.0-pre</Version>
+    <Version>0.7.3-pre</Version>
     <RootNamespace>Minimal.Mvvm.Wpf</RootNamespace>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591;NETSDK1233</NoWarn>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageIcon>logo128.png</PackageIcon>
-    <PackageProjectUrl>https://github.com/IvanGit/NuExt.Minimal.Mvvm.MahApps.Metro</PackageProjectUrl>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/nu-ext/NuExt.Minimal.Mvvm.MahApps.Metro</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,8 +28,8 @@ MahApps.Metro.Controls.Dialogs.MetroDialog</Description>
   </ItemGroup>
 
   <ItemGroup Condition="'$(UseNuExtPackages)' == 'true'">
-    <PackageReference Include="NuExt.Minimal.Mvvm.Wpf" Version="0.7.0" />
-    <PackageReference Include="NuExt.Minimal.Mvvm.SourceGenerator" Version="0.7.0">
+    <PackageReference Include="NuExt.Minimal.Mvvm.Wpf" Version="0.7.3" />
+    <PackageReference Include="NuExt.Minimal.Mvvm.SourceGenerator" Version="0.7.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -41,8 +41,8 @@ MahApps.Metro.Controls.Dialogs.MetroDialog</Description>
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\logo128.png" Pack="true" PackagePath="\" />
-    <None Include=".\..\README.md" Pack="true" PackagePath="\" />
+    <None Include="..\logo.png" Pack="true" PackagePath="\" />
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>

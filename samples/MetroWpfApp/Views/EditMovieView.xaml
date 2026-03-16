@@ -3,7 +3,7 @@
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:minimal="http://schemas.nuext.minimal/xaml"
+             xmlns:nx="http://schemas.nuext.minimal/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:MovieWpfApp"
              xmlns:viewModels="clr-namespace:MovieWpfApp.ViewModels"
@@ -33,9 +33,9 @@
                  mah:TextBoxHelper.SelectAllOnFocus="True"
                  Text="{Binding Movie.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                  TextWrapping="Wrap" FontSize="15">
-            <minimal:Interaction.Behaviors>
-                <minimal:FocusBehavior />
-            </minimal:Interaction.Behaviors>
+            <nx:Interaction.Behaviors>
+                <nx:FocusBehavior />
+            </nx:Interaction.Behaviors>
         </TextBox>
 
         <Label Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Content="{x:Static local:Loc.Release_Date}" />

@@ -2,11 +2,11 @@
                     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:minimal="http://schemas.nuext.minimal/xaml"
+                    xmlns:nx="http://schemas.nuext.minimal/xaml"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     mc:Ignorable="d">
 
-    <DataTemplate x:Key="MetroDialogAccentButtonTemplate" d:DataType="{x:Type minimal:UICommand}">
+    <DataTemplate x:Key="MetroDialogAccentButtonTemplate" d:DataType="{x:Type nx:UICommand}">
         <Button Margin="5, 5"
                 Command="{Binding Command}"
                 Content="{Binding Content}"
@@ -16,7 +16,7 @@
                 Style="{DynamicResource MahApps.Styles.Button.Dialogs.Accent}" />
     </DataTemplate>
 
-    <DataTemplate x:Key="MetroDialogButtonTemplate" d:DataType="{x:Type minimal:UICommand}">
+    <DataTemplate x:Key="MetroDialogButtonTemplate" d:DataType="{x:Type nx:UICommand}">
         <Button Margin="5, 5"
                 Command="{Binding Command}"
                 Content="{Binding Content}"
@@ -26,8 +26,8 @@
                 Style="{DynamicResource MahApps.Styles.Button.Dialogs}" />
     </DataTemplate>
 
-    <minimal:DialogButtonTemplateSelector x:Key="MetroDialogButtonTemplateSelector"
-                                          DefaultButtonTemplate="{StaticResource MetroDialogAccentButtonTemplate}"
-                                          ButtonTemplate="{StaticResource MetroDialogButtonTemplate}" />
+    <nx:DialogButtonTemplateSelector x:Key="MetroDialogButtonTemplateSelector"
+                                     DefaultButtonTemplate="{StaticResource MetroDialogAccentButtonTemplate}"
+                                     ButtonTemplate="{StaticResource MetroDialogButtonTemplate}" />
 
 </ResourceDictionary>

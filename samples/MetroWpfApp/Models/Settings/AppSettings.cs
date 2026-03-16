@@ -1,10 +1,9 @@
 ﻿using Minimal.Mvvm;
 
-namespace MovieWpfApp.Models
+namespace MovieWpfApp.Models;
+
+public sealed partial class AppSettings : SettingsBase
 {
-    public sealed partial class AppSettings : SettingsBase
-    {
-        [Notify]
-        private string? _appTheme;
-    }
+    [Notify]
+    private string? _appTheme;
 }
