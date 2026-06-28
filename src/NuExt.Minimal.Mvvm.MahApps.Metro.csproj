@@ -5,8 +5,6 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ImplicitUsings>enable</ImplicitUsings>
-    <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
-    <PackageTags>nuext;nx;minimal;mvvm;wpf;mahapps; mahapps.metro;xaml;ui;metro;modern;async</PackageTags>
     <Description>Extensions for the MahApps.Metro toolkit using the Minimal MVVM Framework for streamlined Metro-style WPF app development.
 
 Commonly Used Types:
@@ -14,20 +12,17 @@ Minimal.Mvvm.Wpf.DialogCoordinatorService
 Minimal.Mvvm.Wpf.MetroDialogService
 Minimal.Mvvm.Wpf.MetroTabbedDocumentService
 MahApps.Metro.Controls.Dialogs.MetroDialog</Description>
-    <Version>0.7.3-pre</Version>
     <RootNamespace>Minimal.Mvvm.Wpf</RootNamespace>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591;NETSDK1233</NoWarn>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageIcon>logo.png</PackageIcon>
-    <PackageProjectUrl>https://github.com/nu-ext/NuExt.Minimal.Mvvm.MahApps.Metro</PackageProjectUrl>
+    <VersionPrefix>0.7.4-pre</VersionPrefix>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="MahApps.Metro" Version="3.0.0-rc0529" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(UseNuExtPackages)' == 'true'">
+  <ItemGroup Condition="'$(NuExt_UseLocalProjects)' != 'true'">
     <PackageReference Include="NuExt.Minimal.Mvvm.Wpf" Version="0.7.3" />
     <PackageReference Include="NuExt.Minimal.Mvvm.SourceGenerator" Version="0.7.2">
       <PrivateAssets>all</PrivateAssets>
@@ -35,14 +30,9 @@ MahApps.Metro.Controls.Dialogs.MetroDialog</Description>
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup Condition="'$(UseNuExtPackages)' == 'false'">
+  <ItemGroup Condition="'$(NuExt_UseLocalProjects)' == 'true'">
     <ProjectReference Include="..\..\NuExt.Minimal.Mvvm.Wpf\src\NuExt.Minimal.Mvvm.Wpf.csproj" />
     <ProjectReference Include="..\..\NuExt.Minimal.Mvvm.SourceGenerator\src\NuExt.Minimal.Mvvm.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\logo.png" Pack="true" PackagePath="\" />
-    <None Include="..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
