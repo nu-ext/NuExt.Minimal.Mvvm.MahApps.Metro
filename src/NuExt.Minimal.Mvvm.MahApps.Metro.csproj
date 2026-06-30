@@ -15,7 +15,7 @@ MahApps.Metro.Controls.Dialogs.MetroDialog</Description>
     <RootNamespace>Minimal.Mvvm.Wpf</RootNamespace>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591;NETSDK1233</NoWarn>
-    <VersionPrefix>0.7.4-pre</VersionPrefix>
+    <VersionPrefix>0.7.6-pre</VersionPrefix>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,7 +23,7 @@ MahApps.Metro.Controls.Dialogs.MetroDialog</Description>
   </ItemGroup>
 
   <ItemGroup Condition="'$(NuExt_UseLocalProjects)' != 'true'">
-    <PackageReference Include="NuExt.Minimal.Mvvm.Wpf" Version="0.7.4" />
+    <PackageReference Include="NuExt.Minimal.Mvvm.Wpf" Version="0.7.6" />
     <PackageReference Include="NuExt.Minimal.Mvvm.SourceGenerator" Version="0.7.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

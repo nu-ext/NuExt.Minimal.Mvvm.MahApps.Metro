@@ -135,6 +135,8 @@ public sealed partial class App : IServiceProvider, INotifyPropertyChanged, IDis
             return;
         }
 
+        Minimal.Mvvm.Wpf.Bootstrap.Initialize();
+
         ServiceContainer.RegisterService(new DispatcherService() { Name = "AppDispatcherService" });
 
         PresentationTraceSources.Refresh();
