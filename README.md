@@ -3,6 +3,7 @@
 `NuExt.Minimal.Mvvm.MahApps.Metro` is a NuGet package that provides extensions for integrating [MahApps.Metro](https://github.com/MahApps/MahApps.Metro), a popular Metro-style UI toolkit for WPF applications, with [NuExt.Minimal.Mvvm.Wpf](https://github.com/nu-ext/NuExt.Minimal.Mvvm.Wpf), a WPF extension for the lightweight MVVM framework [NuExt.Minimal.Mvvm](https://github.com/nu-ext/NuExt.Minimal.Mvvm). This package includes services and components to facilitate the creation of modern, responsive, and visually appealing user interfaces using the MVVM pattern.
 
 [![NuGet](https://img.shields.io/nuget/v/NuExt.Minimal.Mvvm.MahApps.Metro.svg)](https://www.nuget.org/packages/NuExt.Minimal.Mvvm.MahApps.Metro)
+[![Ask DeepWiki](https://img.shields.io/badge/Ask-DeepWiki-blue)](https://deepwiki.com/nu-ext/NuExt.Minimal.Mvvm.MahApps.Metro)
 [![Build](https://github.com/nu-ext/NuExt.Minimal.Mvvm.MahApps.Metro/actions/workflows/ci.yml/badge.svg)](https://github.com/nu-ext/NuExt.Minimal.Mvvm.MahApps.Metro/actions/workflows/ci.yml)
 [![License](https://img.shields.io/github/license/nu-ext/NuExt.Minimal.Mvvm.MahApps.Metro?label=license)](https://github.com/nu-ext/NuExt.Minimal.Mvvm.MahApps.Metro/blob/main/LICENSE)
 [![Downloads](https://img.shields.io/nuget/dt/NuExt.Minimal.Mvvm.MahApps.Metro.svg)](https://www.nuget.org/packages/NuExt.Minimal.Mvvm.MahApps.Metro)
