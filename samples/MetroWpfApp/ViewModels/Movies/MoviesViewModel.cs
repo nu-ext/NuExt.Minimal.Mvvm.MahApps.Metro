@@ -29,17 +29,17 @@ internal sealed partial class MoviesViewModel : DocumentContentViewModelBase
 
     #region Services
 
-    private IDialogCoordinator DialogCoordinator => GetService<IDialogCoordinator>()!;
+    private IDialogCoordinator DialogCoordinator => GetRequiredService<IDialogCoordinator>();
 
     private IAsyncDialogService? DialogService => GetService<IAsyncDialogService>();
 
-    public EnvironmentService EnvironmentService => GetService<EnvironmentService>()!;
+    public EnvironmentService EnvironmentService => GetRequiredService<EnvironmentService>();
 
-    public ILogger Logger => GetService<ILogger>()!;
+    public ILogger Logger => GetRequiredService<ILogger>();
 
-    private MoviesService MoviesService => GetService<MoviesService>()!;
+    private MoviesService MoviesService => GetRequiredService<MoviesService>();
 
-    private new MainWindowViewModel? ParentViewModel => base.ParentViewModel as MainWindowViewModel;
+    private new MainWindowViewModel ParentViewModel => GetParentViewModel<MainWindowViewModel>();
 
     private SettingsService? SettingsService => GetService<SettingsService>();
 

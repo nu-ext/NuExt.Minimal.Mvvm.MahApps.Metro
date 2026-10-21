@@ -21,7 +21,7 @@ internal sealed partial class MovieViewModel : DocumentContentViewModelBase
 
     #region Services
 
-    private IDialogCoordinator DialogCoordinator => GetService<IDialogCoordinator>()!;
+    private IDialogCoordinator DialogCoordinator => GetRequiredService<IDialogCoordinator>();
 
     #endregion
 

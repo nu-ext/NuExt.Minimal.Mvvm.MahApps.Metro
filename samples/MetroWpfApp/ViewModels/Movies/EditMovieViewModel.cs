@@ -16,7 +16,7 @@ internal sealed class EditMovieViewModel : ControlViewModel, IDataErrorInfo
 
     #region Services
 
-    public MoviesService MoviesService => GetService<MoviesService>()!;
+    public MoviesService MoviesService => GetRequiredService<MoviesService>();
 
     #endregion
 

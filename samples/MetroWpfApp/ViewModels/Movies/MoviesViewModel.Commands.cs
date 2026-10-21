@@ -13,7 +13,7 @@ partial class MoviesViewModel
 {
     #region Command Methods
 
-    private bool CanDelete() => CanEdit() && ParentViewModel?.CloseMovieCommand is not null;
+    private bool CanDelete() => CanEdit() && ParentViewModel.CloseMovieCommand is not null;
 
     [Notify(Setter = Private)]
     private async Task DeleteAsync(CancellationToken cancellationToken)
@@ -42,7 +42,7 @@ partial class MoviesViewModel
         {
             if (itemToDelete is MovieModel movie)
             {
-                await ParentViewModel!.CloseMovieCommand!.ExecuteAsync(movie, cancellationToken);
+                await ParentViewModel.CloseMovieCommand!.ExecuteAsync(movie, cancellationToken);
             }
             await ReloadMoviesAsync(cancellationToken);
             var item = Movies!.FindByPath(parentPath);
@@ -188,13 +188,13 @@ partial class MoviesViewModel
     [Notify(Setter = Private)]
     private async Task OpenMovieAsync(MovieModelBase? item, CancellationToken cancellationToken)
     {
-        await ParentViewModel!.OpenMovieCommand!.ExecuteAsync((item as MovieModel)!, cancellationToken);
+        await ParentViewModel.OpenMovieCommand!.ExecuteAsync((item as MovieModel)!, cancellationToken);
     }
 
     [Notify(Setter = Private)]
     private async Task OpenMovieExternalAsync(MovieModelBase? item, CancellationToken cancellationToken)
     {
-        await ParentViewModel!.OpenMovieExternalCommand!.ExecuteAsync((item as MovieModel)!, cancellationToken);
+        await ParentViewModel.OpenMovieExternalCommand!.ExecuteAsync((item as MovieModel)!, cancellationToken);
     }
 
     private bool CanMove(MovieModelBase draggedObject)

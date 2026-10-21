@@ -115,7 +115,7 @@ public sealed partial class App : IServiceProvider, INotifyPropertyChanged, IDis
         try
         {
             await OpenWindowsService.DisposeAsync();
-            Debug.Assert(OpenWindowsService.Count == 0);
+            Debug.Assert(OpenWindowsService.IsDisposed || OpenWindowsService.Count == 0);
         }
         catch (Exception ex)
         {
@@ -190,7 +190,7 @@ public sealed partial class App : IServiceProvider, INotifyPropertyChanged, IDis
         try
         {
             await _lifetime.DisposeAsync().ConfigureAwait(false);
-            Debug.Assert(OpenWindowsService.Count == 0);
+            Debug.Assert(OpenWindowsService.IsDisposed || OpenWindowsService.Count == 0);
         }
         catch (Exception ex)
         {

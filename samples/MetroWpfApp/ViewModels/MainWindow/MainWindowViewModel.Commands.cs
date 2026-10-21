@@ -99,23 +99,14 @@ partial class MainWindowViewModel
     [Notify(Setter = Private)]
     private async Task ShowMoviesAsync(CancellationToken cancellationToken)
     {
-        var document = await DocumentManagerService!.FindDocumentByIdOrCreateAsync(default(Movies),
-            async x =>
-            {
-                var vm = new MoviesViewModel() { Title = Loc.Movies };
-                try
-                {
-                    var doc = await x.CreateDocumentAsync(nameof(MoviesView), vm, this, null, cancellationToken);
-                    doc.DisposeOnClose = true;
-                    return doc;
-                }
-                catch (Exception ex)
-                {
-                    Debug.Assert(ex is OperationCanceledException, ex.Message);
-                    await vm.DisposeAsync();
-                    throw;
-                }
-            });
+        var document = await DocumentManagerService.FindDocumentByIdOrCreateAsync(
+            id: default(Movies),
+            documentType: nameof(MoviesView),
+            viewModelFactory: static () => new MoviesViewModel() { Title = Loc.Movies },
+            parentViewModel: this,
+            parameter: null,
+            cancellationToken: cancellationToken);
+
         document.Show();
     }
 
@@ -155,46 +146,28 @@ partial class MainWindowViewModel
     [Notify(Setter = Private)]
     private async Task OpenMovieAsync(MovieModel movie, CancellationToken cancellationToken)
     {
-        var document = await DocumentManagerService!.FindDocumentByIdOrCreateAsync(new MovieDocument(movie), async x =>
-        {
-            var vm = new MovieViewModel();
-            try
-            {
-                var doc = await x.CreateDocumentAsync(nameof(MovieView), vm, this, movie, cancellationToken);
-                doc.DisposeOnClose = true;
-                //doc.HideInsteadOfClose = true;
-                return doc;
-            }
-            catch (Exception ex)
-            {
-                Debug.Assert(ex is OperationCanceledException, ex.Message);
-                await vm.DisposeAsync();
-                throw;
-            }
-        });
+        var document = await DocumentManagerService.FindDocumentByIdOrCreateAsync(
+            id: new MovieDocument(movie),
+            documentType: nameof(MovieView),
+            viewModelFactory: static () => new MovieViewModel(),
+            parentViewModel: this,
+            parameter: movie,
+            cancellationToken: cancellationToken);
+
         document.Show();
     }
 
     [Notify(Setter = Private)]
     private async Task OpenMovieExternalAsync(MovieModel movie, CancellationToken cancellationToken)
     {
-        var document = await WindowManagerService!.FindDocumentByIdOrCreateAsync(new MovieDocument(movie), async x =>
-        {
-            var vm = new MovieViewModel();
-            try
-            {
-                var doc = await x.CreateDocumentAsync(nameof(MovieView), vm, this, movie, cancellationToken);
-                doc.DisposeOnClose = true;
-                //doc.HideInsteadOfClose = true;
-                return doc;
-            }
-            catch (Exception ex)
-            {
-                Debug.Assert(ex is OperationCanceledException, ex.Message);
-                await vm.DisposeAsync();
-                throw;
-            }
-        });
+        var document = await WindowManagerService.FindDocumentByIdOrCreateAsync(
+            id: new MovieDocument(movie),
+            documentType: nameof(MovieView),
+            viewModelFactory: static () => new MovieViewModel(),
+            parentViewModel: this,
+            parameter: movie,
+            cancellationToken: cancellationToken);
+
         document.Show();
     }
 
@@ -203,7 +176,7 @@ partial class MainWindowViewModel
     [Notify(Setter = Private)]
     private async Task CloseMovieAsync(MovieModel movie)
     {
-        var doc = DocumentManagerService!.FindDocumentById(new MovieDocument(movie));
+        var doc = DocumentManagerService.FindDocumentById(new MovieDocument(movie));
         if (doc == null) return;
         await doc.CloseAsync().ConfigureAwait(false);
     }

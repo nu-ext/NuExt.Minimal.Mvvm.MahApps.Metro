@@ -152,10 +152,10 @@ public class DialogCoordinatorService : WindowServiceBase, IDialogCoordinator
     }
 
     /// <summary>
-    /// Gets the MetroWindow instance from the provided context.
+    /// Gets the MetroWindow associated with this service.
     /// </summary>
-    /// <param name="context">The context from which to retrieve the MetroWindow instance.</param>
-    /// <returns>The MetroWindow associated with the given context.</returns>
+    /// <param name="context">The dialog context. Must not be <see langword="null"/>.</param>
+    /// <returns>The MetroWindow associated with this service.</returns>
     /// <exception cref="ArgumentNullException">Thrown when the context is null.</exception>
     private MetroWindow GetMetroWindow(object context)
     {

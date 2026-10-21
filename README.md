@@ -1,6 +1,6 @@
 # NuExt.Minimal.Mvvm.MahApps.Metro
 
-`NuExt.Minimal.Mvvm.MahApps.Metro` is a NuGet package that provides extensions for integrating [MahApps.Metro](https://github.com/MahApps/MahApps.Metro), a popular Metro-style UI toolkit for WPF applications, with [NuExt.Minimal.Mvvm.Wpf](https://github.com/nu-ext/NuExt.Minimal.Mvvm.Wpf), a WPF extension for the lightweight MVVM framework [NuExt.Minimal.Mvvm](https://github.com/nu-ext/NuExt.Minimal.Mvvm). This package includes services and components to facilitate the creation of modern, responsive, and visually appealing user interfaces using the MVVM pattern.
+`NuExt.Minimal.Mvvm.MahApps.Metro` integrates MahApps.Metro with `NuExt.Minimal.Mvvm.Wpf`. It provides scoped MahApps dialog coordination, Metro dialogs through the common `IAsyncDialogService` contract, and document management for `MetroTabControl` using the existing NuExt ViewModel and document lifecycles.
 
 [![NuGet](https://img.shields.io/nuget/v/NuExt.Minimal.Mvvm.MahApps.Metro.svg)](https://www.nuget.org/packages/NuExt.Minimal.Mvvm.MahApps.Metro)
 [![Ask DeepWiki](https://img.shields.io/badge/Ask-DeepWiki-blue)](https://deepwiki.com/nu-ext/NuExt.Minimal.Mvvm.MahApps.Metro)
@@ -8,35 +8,36 @@
 [![License](https://img.shields.io/github/license/nu-ext/NuExt.Minimal.Mvvm.MahApps.Metro?label=license)](https://github.com/nu-ext/NuExt.Minimal.Mvvm.MahApps.Metro/blob/main/LICENSE)
 [![Downloads](https://img.shields.io/nuget/dt/NuExt.Minimal.Mvvm.MahApps.Metro.svg)](https://www.nuget.org/packages/NuExt.Minimal.Mvvm.MahApps.Metro)
 
-## What you get
+## Highlights
 
-- **Async dialogs (MahApps)** — MVVM‑friendly `IAsyncDialogService` that shows Metro dialogs and returns `UICommand` / `MessageBoxResult` without UI thread blocking.
-- **Tabbed documents (MetroTabControl)** — a document manager that hosts view + VM in Metro tabs with an explicit, async lifecycle and clean disposal.
-- **Fits the Minimal MVVM WPF layer** — services are dispatcher‑safe and play well with NuExt.Minimal.Mvvm.Wpf window/document patterns.
+- **Scoped MahApps dialog coordination** — use the native `IDialogCoordinator` API through a Window-aware UI service.
+- **Unified dialog contract** — show custom Metro dialogs through `IAsyncDialogService` with View resolution, ViewModel initialization, validation, cancellation, and deterministic cleanup.
+- **Metro tabbed documents** — host Views and ViewModels in `MetroTabControl` through the common `IAsyncDocumentManagerService` contract.
+- **Shared lifecycle** — reuse the same parent, parameter, initialization, closing, and disposal model as `NuExt.Minimal.Mvvm.Wpf`.
+- **Native API access** — use MahApps-specific dialogs directly when the common NuExt abstraction is not sufficient.
 
-> **Requires MahApps.Metro** (add resource dictionaries to `App.xaml` and use `MetroWindow`).
+> The package requires MahApps.Metro resources. Services that host MahApps dialogs must be attached to a `MetroWindow`.
 
 ## Quick Start
 
 ### 1) Enable MahApps in your app (resources and window)
-Add MahApps resource dictionaries to `App.xaml` and use `MetroWindow` as the base for your main window (per MahApps docs). [2](https://mahapps.com/docs/guides/quick-start)
+
+Add the MahApps theme and the integration package resources to `App.xaml`, then use `MetroWindow` as the base for your main window. See the [MahApps.Metro Quick Start](https://mahapps.github.io/mahapps.com/docs/guides/quick-start).
 
 ```xml
 <!-- App.xaml -->
 <Application ...>
-    <Application.Resources>
-      <ResourceDictionary>
-        <ResourceDictionary.MergedDictionaries>
-          <!-- MahApps resource dictionaries -->
-          <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-          <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-          <!-- Pick a theme -->
-          <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
-        </ResourceDictionary.MergedDictionaries>
-      </ResourceDictionary>
-    </Application.Resources>
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/NuExt.Minimal.Mvvm.MahApps.Metro;component/Themes/Generic.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Application.Resources>
 </Application>
 ```
+
 ```xml
 <!-- MainWindow.xaml -->
 <mah:MetroWindow
@@ -60,13 +61,14 @@ Add MahApps resource dictionaries to `App.xaml` and use `MetroWindow` as the bas
         DialogCoordinator="{Binding Source={x:Reference DialogCoordinatorService}}" />
 </nx:Interaction.Behaviors>
 ```
+
 ```csharp
 // ViewModel (NuExt.Minimal.Mvvm.Wpf base)
-private IAsyncDialogService Dialogs => GetService<IAsyncDialogService>("Dialogs");
+private IAsyncDialogService Dialogs => GetRequiredService<IAsyncDialogService>("Dialogs");
 
 public async Task AskAsync(CancellationToken ct)
 {
-	await using var viewModel = new ConfirmViewModel();
+    await using var viewModel = new ConfirmViewModel();
     var result = await Dialogs.ShowDialogAsync(
         MessageBoxButton.OKCancel,
         title: "Confirm",
@@ -81,6 +83,18 @@ public async Task AskAsync(CancellationToken ct)
 }
 ```
 
+Use the native MahApps API when a built-in input, message, login, or progress dialog is more appropriate:
+
+```csharp
+private IDialogCoordinator DialogCoordinator => GetRequiredService<IDialogCoordinator>();
+
+var result = await DialogCoordinator.ShowMessageAsync(
+    this,
+    "Confirmation",
+    "Continue?",
+    MessageDialogStyle.AffirmativeAndNegative);
+```
+
 ### 3) Tabbed documents using MetroTabControl
 
 ```xml
@@ -93,31 +107,32 @@ public async Task AskAsync(CancellationToken ct)
         </nx:Interaction.Behaviors>
     </mah:MetroTabControl>
 ```
+
 ```csharp
-public IAsyncDocumentManagerService Tabs => GetService<IAsyncDocumentManagerService>("Tabs");
+private IAsyncDocumentManagerService Tabs => GetRequiredService<IAsyncDocumentManagerService>("Tabs");
 
 public async Task OpenCustomerAsync(CustomerModel model, CancellationToken ct)
 {
-    var vm = new CustomerViewModel(model);
-    var doc = await Tabs.CreateDocumentAsync("CustomerView", vm, parentViewModel: this, parameter: null, ct);
-    doc.DisposeOnClose = true;
+    var doc = await Tabs.FindDocumentByIdOrCreateAsync(
+        id: model.Id,
+        documentType: "CustomerView",
+        viewModelFactory: () => new CustomerViewModel(model),
+        parentViewModel: this,
+        parameter: null,
+        cancellationToken: ct);
+
     doc.Show();
 }
 ```
 
 See the repo [samples/MetroWpfApp](https://github.com/nu-ext/NuExt.Minimal.Mvvm.MahApps.Metro/tree/main/samples/MetroWpfApp) for a runnable example.
 
-## Commonly Used Types
-
-- **`Minimal.Mvvm.Wpf.DialogCoordinatorService`**: coordinates dialogs in MVVM scenarios.
-- **`Minimal.Mvvm.Wpf.MetroDialogService`**: `IAsyncDialogService` backed by MahApps dialogs.
-- **`Minimal.Mvvm.Wpf.MetroTabbedDocumentService`**: document manager for tabs (MetroTabControl).
-- **`MahApps.Metro.Controls.Dialogs.MetroDialog`**: The class used for custom dialogs.
-
 ## Compatibility
 
 - WPF on **.NET 8/9/10** and **.NET Framework 4.6.2+**
-- Requires MahApps.Metro resources in App.xaml and MetroWindow as your window type.
+- MahApps.Metro 3
+- `MetroWindow` for MahApps dialog hosting
+- `MetroTabControl` for Metro tabbed documents
 
 ## Installation
 
@@ -133,7 +148,9 @@ Or via Visual Studio:
 2. Search for `NuExt.Minimal.Mvvm.MahApps.Metro`.
 3. Click "Install".
 
-**Nice to have**: [NuExt.Minimal.Mvvm.SourceGenerator](https://www.nuget.org/packages/NuExt.Minimal.Mvvm.SourceGenerator) to remove boilerplate in view‑models.
+### Recommended companions
+
+- [`NuExt.Minimal.Mvvm.SourceGenerator`](https://www.nuget.org/packages/NuExt.Minimal.Mvvm.SourceGenerator) removes ViewModel boilerplate at compile time.
 
 ## Contributing
 
