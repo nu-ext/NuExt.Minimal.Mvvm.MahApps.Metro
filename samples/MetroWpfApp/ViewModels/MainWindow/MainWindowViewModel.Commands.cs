@@ -1,13 +1,13 @@
-﻿using ControlzEx.Theming;
+﻿using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Input;
+using ControlzEx.Theming;
 using Minimal.Mvvm;
 using Minimal.Mvvm.Wpf;
 using MovieWpfApp.Models;
 using MovieWpfApp.Views;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Input;
-using static AccessModifier;
+using static Minimal.Mvvm.AccessModifier;
 
 namespace MovieWpfApp.ViewModels;
 

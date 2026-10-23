@@ -32,7 +32,7 @@ public class MetroDialogService : DialogServiceBase, IAsyncDialogService
 
     /// <summary>Identifies the <see cref="DialogTitleFontSize"/> dependency property.</summary>
     public static readonly DependencyProperty DialogTitleFontSizeProperty = DependencyProperty.Register(
-        nameof(DialogTitleFontSize), typeof(double),  typeof(MetroDialogService), new PropertyMetadata(double.NaN));
+        nameof(DialogTitleFontSize), typeof(double), typeof(MetroDialogService), new PropertyMetadata(double.NaN));
 
     /// <summary>Identifies the <see cref="DialogMessageFontSize"/> dependency property.</summary>
     public static readonly DependencyProperty DialogMessageFontSizeProperty = DependencyProperty.Register(
@@ -81,7 +81,7 @@ public class MetroDialogService : DialogServiceBase, IAsyncDialogService
     /// </summary>
     public IDialogCoordinator? DialogCoordinator
     {
-        get => (IDialogCoordinator)GetValue(DialogCoordinatorProperty);
+        get => (IDialogCoordinator?)GetValue(DialogCoordinatorProperty);
         set => SetValue(DialogCoordinatorProperty, value);
     }
 
@@ -161,7 +161,7 @@ public class MetroDialogService : DialogServiceBase, IAsyncDialogService
             DialogTitleFontSize = DialogTitleFontSize,
             DialogMessageFontSize = DialogMessageFontSize,
             DialogButtonFontSize = DialogButtonFontSize,
-            CancellationToken = cancellationToken 
+            CancellationToken = cancellationToken
         };
         var dialog = new MetroDialog(dialogSettings)
         {
@@ -183,7 +183,7 @@ public class MetroDialogService : DialogServiceBase, IAsyncDialogService
             Source = this,
             Mode = BindingMode.OneWay
         });
-        BindingOperations.SetBinding(dialog, BaseMetroDialog.DialogContentMarginProperty, new Binding() 
+        BindingOperations.SetBinding(dialog, BaseMetroDialog.DialogContentMarginProperty, new Binding()
         {
             Path = new PropertyPath(DialogContentMarginProperty),
             Source = this,
@@ -197,15 +197,20 @@ public class MetroDialogService : DialogServiceBase, IAsyncDialogService
         });
 
         var dialogCoordinator = DialogCoordinator ?? MahApps.Metro.Controls.Dialogs.DialogCoordinator.Instance;
+        var isShown = false;
         try
         {
-            await ViewModelHelper.InitializeViewAsync(view, viewModel, parentViewModel, parameter, cancellationToken);               
+            await ViewModelHelper.InitializeViewAsync(view, viewModel, parentViewModel, parameter, cancellationToken);
             await dialogCoordinator.ShowMetroDialogAsync(this, dialog);
+            isShown = true;
             return await dialog.WaitForButtonPressAsync();
         }
         finally
         {
-            await dialogCoordinator.HideMetroDialogAsync(this, dialog);
+            if (isShown)
+            {
+                await dialogCoordinator.HideMetroDialogAsync(this, dialog);
+            }
             BindingOperations.ClearAllBindings(dialog);
         }
     }

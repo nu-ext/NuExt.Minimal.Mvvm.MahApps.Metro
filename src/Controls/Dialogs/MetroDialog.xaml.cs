@@ -68,7 +68,7 @@ public partial class MetroDialog
     /// </summary>
     public IEnumerable? CommandsSource
     {
-        get => (IEnumerable)GetValue(CommandsSourceProperty);
+        get => (IEnumerable?)GetValue(CommandsSourceProperty);
         set => SetValue(CommandsSourceProperty, value);
     }
 
