@@ -10,13 +10,11 @@
 
 ## Highlights
 
-- **Scoped MahApps dialog coordination** — use the native `IDialogCoordinator` API through a Window-aware UI service.
+- **Scoped dialog coordination** — use the native `IDialogCoordinator` API through a Window-aware UI service.
 - **Unified dialog contract** — show custom Metro dialogs through `IAsyncDialogService` with View resolution, ViewModel initialization, validation, cancellation, and deterministic cleanup.
 - **Metro tabbed documents** — host Views and ViewModels in `MetroTabControl` through the common `IAsyncDocumentManagerService` contract.
 - **Shared lifecycle** — reuse the same parent, parameter, initialization, closing, and disposal model as `NuExt.Minimal.Mvvm.Wpf`.
 - **Native API access** — use MahApps-specific dialogs directly when the common NuExt abstraction is not sufficient.
-
-> The package requires MahApps.Metro resources. Services that host MahApps dialogs must be attached to a `MetroWindow`.
 
 ## Quick Start
 
