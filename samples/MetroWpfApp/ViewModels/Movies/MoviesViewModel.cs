@@ -12,6 +12,7 @@ using static Minimal.Mvvm.AccessModifier;
 
 namespace MovieWpfApp.ViewModels;
 
+[GenerateCommands]
 internal sealed partial class MoviesViewModel : DocumentContentViewModelBase
 {
     #region Properties
@@ -31,7 +32,7 @@ internal sealed partial class MoviesViewModel : DocumentContentViewModelBase
 
     private IDialogCoordinator DialogCoordinator => GetRequiredService<IDialogCoordinator>();
 
-    private IAsyncDialogService? DialogService => GetService<IAsyncDialogService>();
+    private IAsyncDialogService DialogService => GetRequiredService<IAsyncDialogService>();
 
     public EnvironmentService EnvironmentService => GetRequiredService<EnvironmentService>();
 

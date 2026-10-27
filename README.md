@@ -152,6 +152,17 @@ Or via Visual Studio:
 
 - [`NuExt.Minimal.Mvvm.SourceGenerator`](https://www.nuget.org/packages/NuExt.Minimal.Mvvm.SourceGenerator) removes ViewModel boilerplate at compile time.
 
+## Ecosystem
+
+- [NuExt.Minimal.Mvvm](https://github.com/nu-ext/NuExt.Minimal.Mvvm)
+- [NuExt.Minimal.Mvvm.SourceGenerator](https://github.com/nu-ext/NuExt.Minimal.Mvvm.SourceGenerator)
+- [NuExt.Minimal.Behaviors.Wpf](https://github.com/nu-ext/NuExt.Minimal.Behaviors.Wpf)
+- [NuExt.Presentation.Wpf](https://github.com/nu-ext/NuExt.Presentation.Wpf)
+- [NuExt.Minimal.Mvvm.Wpf](https://github.com/nu-ext/NuExt.Minimal.Mvvm.Wpf)
+- [NuExt.System](https://github.com/nu-ext/NuExt.System)
+- [NuExt.System.Data](https://github.com/nu-ext/NuExt.System.Data)
+- [NuExt.System.Data.SQLite](https://github.com/nu-ext/NuExt.System.Data.SQLite)
+
 ## Contributing
 
 Issues and PRs are welcome. Keep changes minimal and performance-conscious.

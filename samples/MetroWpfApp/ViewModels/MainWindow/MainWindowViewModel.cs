@@ -1,10 +1,4 @@
-﻿using ControlzEx.Theming;
-using MahApps.Metro.Controls.Dialogs;
-using Microsoft.Extensions.Logging;
-using Minimal.Mvvm;
-using Minimal.Mvvm.Wpf;
-using MovieWpfApp.Services;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Reflection;
@@ -12,10 +6,17 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Media;
+using ControlzEx.Theming;
+using MahApps.Metro.Controls.Dialogs;
+using Microsoft.Extensions.Logging;
+using Minimal.Mvvm;
+using Minimal.Mvvm.Wpf;
+using MovieWpfApp.Services;
 
 namespace MovieWpfApp.ViewModels;
 
-internal sealed partial class MainWindowViewModel : WindowViewModel
+[GenerateCommands]
+internal sealed partial class MainWindowViewModel : WindowViewModelBase
 {
     private IAsyncDocument? _lastActiveDocument;
     private IAsyncDocument? _lastActiveWindow;
@@ -23,10 +24,10 @@ internal sealed partial class MainWindowViewModel : WindowViewModel
     #region Properties
 
     [Notify(CallbackName = nameof(OnActiveDocumentChanged))]
-    private IAsyncDocument? _activeDocument;
+    public partial IAsyncDocument? ActiveDocument { get; set; }
 
     [Notify(CallbackName = nameof(OnActiveWindowChanged))]
-    private IAsyncDocument? _activeWindow;
+    public partial IAsyncDocument? ActiveWindow { get; set; }
 
     public ObservableCollection<MenuItemViewModel> MenuItems { get; } = [];
 
@@ -140,6 +141,7 @@ internal sealed partial class MainWindowViewModel : WindowViewModel
 
     private ValueTask LoadMenuAsync(CancellationToken cancellationToken)
     {
+        VerifyAccess();
         cancellationToken.ThrowIfCancellationRequested();
         MenuItems.Clear();
         var menuItems = new MenuItemViewModel[]
@@ -238,7 +240,7 @@ internal sealed partial class MainWindowViewModel : WindowViewModel
         Debug.Assert(Logger != null, $"{nameof(Logger)} is null");
         Debug.Assert(MoviesService != null, $"{nameof(MoviesService)} is null");
         Debug.Assert(SettingsService != null, $"{nameof(SettingsService)} is null");
-        Debug.Assert(GetDispatcherService()?.Name == "AppDispatcherService");
+        Debug.Assert(GetDispatcherService().Name == "AppDispatcherService");
 
         Lifetime.AddAsync(DocumentManagerService.CloseAllAsync);
         if (DocumentManagerService is INotifyPropertyChanged notifyPropertyChanged)
