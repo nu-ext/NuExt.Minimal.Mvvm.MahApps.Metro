@@ -1,4 +1,12 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.ComponentModel;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
+using System.Windows;
+using System.Windows.Threading;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Minimal.Mvvm;
 using Minimal.Mvvm.Wpf;
@@ -9,13 +17,6 @@ using NLog;
 using NLog.Extensions.Logging;
 using Presentation.Wpf;
 using Presentation.Wpf.Diagnostics;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Globalization;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Threading;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
 using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
@@ -147,9 +148,15 @@ public sealed partial class App : IServiceProvider, INotifyPropertyChanged, IDis
 
         var configuration = BuildConfiguration(EnvironmentService);
         ServiceContainer.RegisterService(configuration);
+
         ConfigureLogging(EnvironmentService);
 
-        EnvironmentService.LoadLocalization(typeof(Loc), CultureInfo.CurrentUICulture.IetfLanguageTag);
+        var culture = CultureInfo.CurrentUICulture.IetfLanguageTag;
+        var langFilePath = Path.Combine(EnvironmentService.ConfigDirectory, $"local.{culture}.json");
+        if (File.Exists(langFilePath))
+        {
+            Loc.LoadFromJsonFile(langFilePath);
+        }
 
         InitializeSettings();
         InitializeAppTheme(configuration);
