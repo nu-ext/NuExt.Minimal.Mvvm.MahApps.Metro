@@ -45,7 +45,8 @@
                             DirectoryName="{Binding EnvironmentService.SettingsDirectory, FallbackValue={x:Null}}"/>
         <nx:WindowedDocumentService x:Name="Windows" 
                                     ActiveDocument="{Binding ActiveWindow}"
-                                    FallbackViewType="{x:Type views:ErrorView}">
+                                    FallbackViewType="{x:Type views:ErrorView}"
+                                    ActiveDocumentChangedCommand="{Binding ActiveWindowChangedCommand}">
             <nx:WindowedDocumentService.WindowStyle>
                 <Style TargetType="{x:Type mah:MetroWindow}">
                     <Setter Property="nx:Interaction.BehaviorsTemplate">
@@ -64,9 +65,6 @@
             <nx:WindowedDocumentService.WindowType>
                 <x:Type TypeName="mah:MetroWindow"/>
             </nx:WindowedDocumentService.WindowType>
-            <nx:Interaction.Behaviors>
-                <nx:EventToCommand EventName="ActiveDocumentChanged" Command="{Binding ActiveWindowChangedCommand}"/>
-            </nx:Interaction.Behaviors>
         </nx:WindowedDocumentService>
     </nx:Interaction.Behaviors>
     <Grid>
@@ -88,11 +86,8 @@
             <nx:Interaction.Behaviors>
                 <nx:MetroTabbedDocumentService x:Name="Documents" CloseButtonEnabled="True"
                                                ActiveDocument="{Binding ActiveDocument}"
-                                               FallbackViewType="{x:Type views:ErrorView}">
-                    <nx:Interaction.Behaviors>
-                        <nx:EventToCommand EventName="ActiveDocumentChanged" Command="{Binding ActiveDocumentChangedCommand}"/>
-                    </nx:Interaction.Behaviors>
-                </nx:MetroTabbedDocumentService>
+                                               FallbackViewType="{x:Type views:ErrorView}"
+                                               ActiveDocumentChangedCommand="{Binding ActiveDocumentChangedCommand}" />
             </nx:Interaction.Behaviors>
         </mah:MetroTabControl>
 

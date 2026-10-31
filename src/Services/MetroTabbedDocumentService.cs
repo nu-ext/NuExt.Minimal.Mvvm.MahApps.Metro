@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel;
-using MahApps.Metro.Controls;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using MahApps.Metro.Controls;
 
 namespace Minimal.Mvvm.Wpf;
 
@@ -12,7 +12,7 @@ namespace Minimal.Mvvm.Wpf;
 /// Handles creation, lifecycle, and disposal of documents as metro-styled tabs.
 /// This service extends DocumentServiceBase for asynchronous document management.
 /// </summary>
-public class MetroTabbedDocumentService : TabbedDocumentService
+public sealed class MetroTabbedDocumentService : TabbedDocumentService
 {
     #region Dependency Properties
 
@@ -56,7 +56,7 @@ public class MetroTabbedDocumentService : TabbedDocumentService
         }
 
         e.Cancel = true;
-        _ = tabControl.Dispatcher.InvokeAsync(async () => await CloseTabItemAsync(document, document.CancellationToken));
+        _ = tabControl.Dispatcher.InvokeAsync(async () => await CloseTabItemAsync(document, document.CancellationToken).ConfigureAwait(false));
     }
 
     private static async ValueTask CloseTabItemAsync(TabbedDocument document, CancellationToken cancellationToken)

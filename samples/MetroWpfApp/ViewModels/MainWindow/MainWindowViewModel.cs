@@ -233,8 +233,10 @@ internal sealed partial class MainWindowViewModel : WindowViewModelBase
         }
     }
 
-    protected override Task InitializeAsyncCore(CancellationToken cancellationToken)
+    protected override async Task InitializeAsyncCore(CancellationToken cancellationToken)
     {
+        await base.InitializeAsyncCore(cancellationToken);
+
         Debug.Assert(DialogCoordinator != null, $"{nameof(DialogCoordinator)} is null");
         Debug.Assert(EnvironmentService != null, $"{nameof(EnvironmentService)} is null");
         Debug.Assert(Logger != null, $"{nameof(Logger)} is null");
@@ -257,8 +259,6 @@ internal sealed partial class MainWindowViewModel : WindowViewModelBase
                 () => notifyPropertyChanged1.PropertyChanged += WindowManagerService_PropertyChanged,
                 () => notifyPropertyChanged1.PropertyChanged -= WindowManagerService_PropertyChanged);
         }
-
-        return base.InitializeAsyncCore(cancellationToken);
     }
 
     private void UpdateTitle()
