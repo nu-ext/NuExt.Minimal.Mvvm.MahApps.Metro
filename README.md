@@ -157,6 +157,7 @@ Or via Visual Studio:
 - [NuExt.Minimal.Behaviors.Wpf](https://github.com/nu-ext/NuExt.Minimal.Behaviors.Wpf)
 - [NuExt.Presentation.Wpf](https://github.com/nu-ext/NuExt.Presentation.Wpf)
 - [NuExt.Minimal.Mvvm.Wpf](https://github.com/nu-ext/NuExt.Minimal.Mvvm.Wpf)
+- [NuExt.Minimal.Mvvm.AvalonDock](https://github.com/nu-ext/NuExt.Minimal.Mvvm.AvalonDock)
 - [NuExt.System](https://github.com/nu-ext/NuExt.System)
 - [NuExt.System.Data](https://github.com/nu-ext/NuExt.System.Data)
 - [NuExt.System.Data.SQLite](https://github.com/nu-ext/NuExt.System.Data.SQLite)

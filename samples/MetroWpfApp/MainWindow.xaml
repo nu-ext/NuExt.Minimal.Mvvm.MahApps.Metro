@@ -18,100 +18,99 @@
                  WindowStartupLocation="CenterScreen"
                  WindowTransitionsEnabled="False"
                  Title="{Binding Title, TargetNullValue={x:Static local:Loc.Untitled}}" Height="450" Width="800" MinHeight="450" MinWidth="800">
-    <mah:MetroWindow.IconTemplate>
-        <DataTemplate>
-            <iconPacks:PackIconMaterial Kind="VideoVintage" Margin="4" Width="30" Height="30" 
+  <mah:MetroWindow.IconTemplate>
+    <DataTemplate>
+      <iconPacks:PackIconMaterial Kind="VideoVintage" Margin="4" Width="30" Height="30" 
                                         HorizontalAlignment="Center" VerticalAlignment="Center"
                                         Foreground="{DynamicResource MahApps.Brushes.IdealForeground}"/>
-        </DataTemplate>
-    </mah:MetroWindow.IconTemplate>
-    <nx:Interaction.Behaviors>
-        <nx:WindowService/>
-        <nx:DialogCoordinatorService x:Name="DialogCoordinatorService"/>
-        <nx:MetroDialogService DialogCoordinator="{Binding Source={x:Reference DialogCoordinatorService}}"
+    </DataTemplate>
+  </mah:MetroWindow.IconTemplate>
+  <nx:Interaction.Behaviors>
+    <nx:WindowService ClosingCommand="{Binding ClosingCommand}"/>
+    <nx:DialogCoordinatorService x:Name="DialogCoordinatorService"/>
+    <nx:MetroDialogService DialogCoordinator="{Binding Source={x:Reference DialogCoordinatorService}}"
                                MessageBoxButtonLocalizer="{StaticResource MessageBoxButtonLocalizer}"
                                DialogContentMargin="*"
                                DialogContentWidth="8*"
                                ValidatesOnDataErrors="True"/>
-        <nx:EventToCommand EventName="Closing" Command="{Binding ClosingCommand}" PassEventArgsToCommand="True"/>
-        <nx:EventToCommand EventName="ContentRendered" Command="{Binding ContentRenderedCommand}"/>
-        <nx:EventToCommand EventName="Loaded" Command="{Binding LoadedCommand}" />
-        <nx:KeyToCommand Gesture="CTRL+O" Command="{Binding ShowMoviesCommand}" />
-        <nx:WindowPlacementService FileName="MainWindow" 
+    <nx:EventToCommand EventName="Loaded" Command="{Binding LoadedCommand}" />
+    <nx:EventToCommand EventName="ContentRendered" Command="{Binding ContentRenderedCommand}"/>
+    <nx:KeyToCommand Gesture="CTRL+O" Command="{Binding ShowMoviesCommand}" />
+    <nx:WindowPlacementService FileName="MainWindow" 
                                    DirectoryName="{Binding EnvironmentService.SettingsDirectory, FallbackValue={x:Null}}"
                                    PlacementRestoredCommand="{Binding PlacementRestoredCommand}" 
                                    PlacementSavedCommand="{Binding PlacementSavedCommand}"/>
-        <nx:SettingsService Prefix="MainWindow" 
+    <nx:SettingsService Prefix="MainWindow" 
                             DirectoryName="{Binding EnvironmentService.SettingsDirectory, FallbackValue={x:Null}}"/>
-        <nx:WindowedDocumentService x:Name="Windows" 
+    <nx:WindowedDocumentService x:Name="Windows" 
                                     ActiveDocument="{Binding ActiveWindow}"
                                     FallbackViewType="{x:Type views:ErrorView}"
                                     ActiveDocumentChangedCommand="{Binding ActiveWindowChangedCommand}">
-            <nx:WindowedDocumentService.WindowStyle>
-                <Style TargetType="{x:Type mah:MetroWindow}">
-                    <Setter Property="nx:Interaction.BehaviorsTemplate">
-                        <Setter.Value>
-                            <DataTemplate>
-                                <ItemsControl>
-                                    <nx:DialogCoordinatorService />
-                                    <nx:WindowService Name="CurrentWindowService"/>
-                                    <nx:EventToCommand EventName="ContentRendered" Command="{Binding ContentRenderedCommand}"/>
-                                </ItemsControl>
-                            </DataTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </nx:WindowedDocumentService.WindowStyle>
-            <nx:WindowedDocumentService.WindowType>
-                <x:Type TypeName="mah:MetroWindow"/>
-            </nx:WindowedDocumentService.WindowType>
-        </nx:WindowedDocumentService>
-    </nx:Interaction.Behaviors>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+      <nx:WindowedDocumentService.WindowStyle>
+        <Style TargetType="{x:Type mah:MetroWindow}">
+          <Setter Property="nx:Interaction.BehaviorsTemplate">
+            <Setter.Value>
+              <DataTemplate>
+                <ItemsControl>
+                  <nx:DialogCoordinatorService />
+                  <nx:WindowService Name="CurrentWindowService"/>
+                  <nx:EventToCommand EventName="ContentRendered" Command="{Binding ContentRenderedCommand}"/>
+                </ItemsControl>
+              </DataTemplate>
+            </Setter.Value>
+          </Setter>
+        </Style>
+      </nx:WindowedDocumentService.WindowStyle>
+      <nx:WindowedDocumentService.WindowType>
+        <x:Type TypeName="mah:MetroWindow"/>
+      </nx:WindowedDocumentService.WindowType>
+    </nx:WindowedDocumentService>
+  </nx:Interaction.Behaviors>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
 
-        <Menu Grid.Row="0" ItemsSource="{Binding MenuItems}" ItemContainerStyleSelector="{StaticResource MenuItemStyleSelector}"/>
+    <Menu Grid.Row="0" ItemsSource="{Binding MenuItems}" ItemContainerStyleSelector="{StaticResource MenuItemStyleSelector}"/>
 
-        <mah:MetroTabControl Grid.Row="1" TabStripPlacement="Top"
+    <mah:MetroTabControl Grid.Row="1" TabStripPlacement="Top"
                              KeepVisualTreeInMemoryWhenChangingTabs="True"
                              Template="{StaticResource MahApps.Templates.MetroTabControl.KeepVisualTreeInMemory.SingleRow}"
                              mah:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True"
                              mah:HeaderedControlHelper.HeaderFontSize="14"
                              mah:TabControlHelper.Underlined="SelectedTabItem" 
                              mah:TabControlHelper.UnderlinePlacement="Bottom">
-            <nx:Interaction.Behaviors>
-                <nx:MetroTabbedDocumentService x:Name="Documents" CloseButtonEnabled="True"
+      <nx:Interaction.Behaviors>
+        <nx:MetroTabbedDocumentService x:Name="Documents" CloseButtonEnabled="True"
                                                ActiveDocument="{Binding ActiveDocument}"
                                                FallbackViewType="{x:Type views:ErrorView}"
                                                ActiveDocumentChangedCommand="{Binding ActiveDocumentChangedCommand}" />
-            </nx:Interaction.Behaviors>
-        </mah:MetroTabControl>
+      </nx:Interaction.Behaviors>
+    </mah:MetroTabControl>
 
-        <StatusBar Grid.Row="2">
-            <StatusBarItem>
-                <TextBlock>
+    <StatusBar Grid.Row="2">
+      <StatusBarItem>
+        <TextBlock>
                     <Run Text="{x:Static local:Loc.Documents_Opened}"/>
                     <Run Text=":"/>
                     <Run Text="{Binding Count, ElementName=Documents, Mode=OneWay}"/>
-                </TextBlock>
-            </StatusBarItem>
-            <Separator />
-            <StatusBarItem>
-                <TextBlock>
+        </TextBlock>
+      </StatusBarItem>
+      <Separator />
+      <StatusBarItem>
+        <TextBlock>
                     <Run Text="{x:Static local:Loc.Windows_Opened}"/>
                     <Run Text=":"/>
                     <Run Text="{Binding Count, ElementName=Windows, Mode=OneWay}"/>
-                </TextBlock>
-            </StatusBarItem>
-            <Separator />
-            <StatusBarItem>
-                <TextBlock Text="{Binding Source={StaticResource AppBindingProxy}, Path=DataContext.PerformanceMonitor.FormattedUsage, FallbackValue={x:Null}}" />
-            </StatusBarItem>
-        </StatusBar>
+        </TextBlock>
+      </StatusBarItem>
+      <Separator />
+      <StatusBarItem>
+        <TextBlock Text="{Binding Source={StaticResource AppBindingProxy}, Path=DataContext.PerformanceMonitor.FormattedUsage, FallbackValue={x:Null}}" />
+      </StatusBarItem>
+    </StatusBar>
 
-    </Grid>
+  </Grid>
 </mah:MetroWindow>
