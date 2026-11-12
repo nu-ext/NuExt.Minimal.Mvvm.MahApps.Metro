@@ -127,7 +127,7 @@ See the repo [samples/MetroWpfApp](https://github.com/nu-ext/NuExt.Minimal.Mvvm.
 
 ## Compatibility
 
-- WPF on **.NET 8/9/10** and **.NET Framework 4.6.2+**
+- WPF on **.NET 8/9/10/11** and **.NET Framework 4.6.2+**
 - MahApps.Metro 3
 - `MetroWindow` for MahApps dialog hosting
 - `MetroTabControl` for Metro tabbed documents
