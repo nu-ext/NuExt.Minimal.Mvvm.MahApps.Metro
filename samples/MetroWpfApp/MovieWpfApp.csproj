@@ -15,18 +15,15 @@
     <PackageReference Condition="'$(TargetFramework)' != 'net11.0-windows' and '$(TargetFramework)' != 'net10.0-windows'" Include="Microsoft.Extensions.Configuration.Json" Version="10.0.15" />
     <PackageReference Condition="'$(TargetFramework)' == 'net11.0-windows' or '$(TargetFramework)' == 'net10.0-windows'" Include="Microsoft.Extensions.Configuration.Json" Version="11.0.0" />
     <PackageReference Include="NLog.Extensions.Logging" Version="6.3.0" />
-    <PackageReference Condition="'$(NuExt_UseLocalProjects)' != 'true'" Include="NuExt.Minimal.Mvvm.SourceGenerator" Version="0.9.1">
+    <PackageReference Condition="'$(NuExt_UseLocalProjects)' != 'true'" Include="NuExt.Minimal.Mvvm.SourceGenerator" Version="0.9.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup Condition="'$(NuExt_UseLocalProjects)' == 'true'">
-    <ProjectReference Include="..\..\..\NuExt.Minimal.Mvvm.SourceGenerator\src\NuExt.Minimal.Mvvm.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-  </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\src\NuExt.Minimal.Mvvm.MahApps.Metro.csproj" />
+    <ProjectReference Condition="'$(NuExt_UseLocalProjects)' == 'true'" Include="..\..\..\NuExt.Minimal.Mvvm.SourceGenerator\src\NuExt.Minimal.Mvvm.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
   <ItemGroup>
