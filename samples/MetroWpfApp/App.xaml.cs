@@ -285,7 +285,7 @@ public sealed partial class App : IServiceProvider, INotifyPropertyChanged, IDis
     {
         Debug.Assert(SettingsService != null, $"{nameof(SettingsService)} is null");
         Debug.Assert(Settings.IsSuspended == false);
-        using (Settings.SuspendDirty())
+        using (Settings.SuspendChangeTracking())
         {
             SettingsService?.LoadSettings(Settings);
         }
@@ -294,9 +294,9 @@ public sealed partial class App : IServiceProvider, INotifyPropertyChanged, IDis
     private void SaveSettings()
     {
         Debug.Assert(SettingsService != null, $"{nameof(SettingsService)} is null");
-        if (Settings.IsDirty && SettingsService!.SaveSettings(Settings))
+        if (Settings.IsChanged && SettingsService!.SaveSettings(Settings))
         {
-            Settings.ResetDirty();
+            Settings.AcceptChanges();
         }
     }
 
