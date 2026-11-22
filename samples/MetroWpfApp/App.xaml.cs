@@ -284,7 +284,7 @@ public sealed partial class App : IServiceProvider, INotifyPropertyChanged, IDis
     private void LoadSettings()
     {
         Debug.Assert(SettingsService != null, $"{nameof(SettingsService)} is null");
-        Debug.Assert(Settings.IsSuspended == false);
+        Debug.Assert(Settings.IsReadOnly == false);
         using (Settings.SuspendChangeTracking())
         {
             SettingsService?.LoadSettings(Settings);

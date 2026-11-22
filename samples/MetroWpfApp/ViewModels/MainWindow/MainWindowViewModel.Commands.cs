@@ -197,7 +197,7 @@ partial class MainWindowViewModel
         await MoviesService.InitializeAsync(cancellationToken);
         RaiseCanExecuteChanged();
 
-        Debug.Assert(Settings!.IsSuspended == false);
+        Debug.Assert(Settings!.IsReadOnly == false);
         if (Settings.MoviesOpened)
         {
             ShowMoviesCommand?.Execute(null);
