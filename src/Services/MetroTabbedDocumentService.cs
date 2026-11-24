@@ -18,7 +18,7 @@ public sealed class MetroTabbedDocumentService : TabbedDocumentService
 
     public static readonly DependencyProperty CloseButtonEnabledProperty = DependencyProperty.Register(
         nameof(CloseButtonEnabled), typeof(bool), typeof(MetroTabbedDocumentService),
-        new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
+        new PropertyMetadata(false));
 
     #endregion
 
