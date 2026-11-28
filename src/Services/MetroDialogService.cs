@@ -1,6 +1,8 @@
 ﻿using MahApps.Metro.Controls.Dialogs;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 
@@ -163,11 +165,14 @@ public class MetroDialogService : DialogServiceBase, IAsyncDialogService
             DialogButtonFontSize = DialogButtonFontSize,
             CancellationToken = cancellationToken
         };
+        // Materialised once: the dialog enumerates the commands several times (buttons, default/cancel
+        // lookup) and compares them by reference, so a lazy sequence would produce different instances.
+        var commands = dialogCommands as ICollection<UICommand> ?? dialogCommands.ToList();
         var dialog = new MetroDialog(dialogSettings)
         {
             Title = title,
             Content = view,
-            CommandsSource = dialogCommands
+            CommandsSource = commands
         };
 
         ViewModelHelper.SetDataContextBinding(view, FrameworkElement.DataContextProperty, dialog);

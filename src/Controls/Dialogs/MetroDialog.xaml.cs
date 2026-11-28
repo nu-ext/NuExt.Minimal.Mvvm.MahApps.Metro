@@ -126,7 +126,8 @@ public partial class MetroDialog
                 result = command;
             }
 
-            if (result != DefaultCommand || !HasValidationErrors())
+            // Nothing to resolve when there is no default command: the dialog must stay open.
+            if (result != null && (result != DefaultCommand || !HasValidationErrors()))
             {
                 _tcs.TrySetResult(result);
             }
@@ -184,10 +185,21 @@ public partial class MetroDialog
         return lifetime;
     }
 
-    public async ValueTask<UICommand?> WaitForButtonPressAsync()
+    /// <summary>
+    /// Waits asynchronously until the user presses one of the dialog buttons (or cancels the dialog)
+    /// and returns the selected command.
+    /// </summary>
+    /// <returns>
+    /// The <see cref="UICommand"/> selected by the user, the cancel command when the dialog was dismissed,
+    /// or <see langword="null"/> when there is no command to report.
+    /// </returns>
+    public async Task<UICommand?> WaitForButtonPressAsync()
     {
         using var subscription = SubscribeMetroDialog();
-        return await _tcs.Task.ConfigureAwait(false);
+
+        // No ConfigureAwait(false): the subscription is disposed when the await completes, and it detaches
+        // handlers from the dialog elements, which must happen on the UI thread.
+        return await _tcs.Task;
     }
 
     #endregion

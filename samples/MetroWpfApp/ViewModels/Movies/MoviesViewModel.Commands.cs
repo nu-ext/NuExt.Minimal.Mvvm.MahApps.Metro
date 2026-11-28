@@ -25,7 +25,7 @@ partial class MoviesViewModel
             CancellationToken = cancellationToken
         };
 
-        var dialogResult = await DialogCoordinator!.ShowMessageAsync(this, Loc.Confirmation,
+        var dialogResult = await DialogCoordinator.ShowMessageAsync(this, Loc.Confirmation,
             string.Format(Loc.Are_you_sure_you_want_to_delete__Arg0__ ,SelectedItem?.Name),
             MessageDialogStyle.AffirmativeAndNegative, dialogSettings);
         if (dialogResult != MessageDialogResult.Affirmative)
@@ -71,7 +71,7 @@ partial class MoviesViewModel
                     CancellationToken = cancellationToken,
                     DefaultText = group.Name,
                 };
-                var groupName = await DialogCoordinator!.ShowInputAsync(this, Loc.Edit_Group,
+                var groupName = await DialogCoordinator.ShowInputAsync(this, Loc.Edit_Group,
                     Loc.Enter_new_group_name, dialogSettings);
                 if (string.IsNullOrWhiteSpace(groupName))
                 {
@@ -83,7 +83,7 @@ partial class MoviesViewModel
 
                 await using (var viewModel = new EditMovieViewModel())
                 {
-                    var dlgResult = await DialogService!.ShowDialogAsync(MessageBoxButton.OKCancel, Loc.Edit_Movie,
+                    var dlgResult = await DialogService.ShowDialogAsync(MessageBoxButton.OKCancel, Loc.Edit_Movie,
                         nameof(EditMovieView), viewModel, this, movie, cancellationToken);
                     if (dlgResult != MessageBoxResult.OK)
                     {
@@ -122,7 +122,7 @@ partial class MoviesViewModel
             DefaultText = Loc.New_Group
         };
 
-        var groupName = await DialogCoordinator!.ShowInputAsync(this, Loc.New_Group,
+        var groupName = await DialogCoordinator.ShowInputAsync(this, Loc.New_Group,
             Loc.Enter_new_group_name, dialogSettings);
 
         if (string.IsNullOrWhiteSpace(groupName))
